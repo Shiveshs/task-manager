@@ -11,7 +11,7 @@ const TaskForm = ({ onTaskAdd, taskToEdit }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If taskToEdit is provided, populate the form with task details
+    // If taskToEdit is provided, populating the form with task details
     if (taskToEdit) {
       setTitle(taskToEdit.title || "");
       setDescription(taskToEdit.description || "");
@@ -35,9 +35,9 @@ const TaskForm = ({ onTaskAdd, taskToEdit }) => {
     const newTask = { title, description, deadline };
     if (taskToEdit) {
       // If taskToEdit is provided, it's an edit operation
-      onTaskAdd(newTask, true); // Pass a second parameter to indicate it's an edit
+      onTaskAdd(newTask, true);
     } else {
-      onTaskAdd(newTask); // Otherwise, it's an add operation
+      onTaskAdd(newTask);
     }
     navigate("/");
   };

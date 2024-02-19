@@ -3,8 +3,6 @@ import {
   Paper,
   Typography,
   List,
-  ListItem,
-  ListItemText,
   Card,
   CardContent,
   Button,
@@ -53,18 +51,22 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
                 {task.description}
               </Typography>
             </CardContent>
-            <Button
-              variant='outlined'
-              color='primary'
-              onClick={() => handleEdit(task)}>
-              Edit
-            </Button>
-            <Button
-              variant='outlined'
-              color='secondary'
-              onClick={() => onTaskDelete(index)}>
-              Delete
-            </Button>
+            <CardContent sx={{ display: "flex" }}>
+              <Button
+                variant='outlined'
+                color='primary'
+                onClick={() => handleEdit(task)}
+                sx={{ margin: "2%" }}>
+                Edit
+              </Button>
+              <Button
+                variant='outlined'
+                color='secondary'
+                onClick={() => onTaskDelete(index)}
+                sx={{ margin: "2%" }}>
+                Delete
+              </Button>
+            </CardContent>
           </Card>
         ))}
       </List>
