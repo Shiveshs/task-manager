@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
-const TaskForm = ({ onTaskAdd }) => {
+const TaskForm = ({ onTaskAdd, taskToEdit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If taskToEdit is provided, populate the form with task details
+    if (taskToEdit) {
+      setTitle(taskToEdit.title || "");
+      setDescription(taskToEdit.description || "");
+      setDeadline(taskToEdit.deadline || "");
+    }
+  }, [taskToEdit]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -24,7 +33,12 @@ const TaskForm = ({ onTaskAdd }) => {
 
   const handleSubmit = () => {
     const newTask = { title, description, deadline };
-    onTaskAdd(newTask);
+    if (taskToEdit) {
+      // If taskToEdit is provided, it's an edit operation
+      onTaskAdd(newTask, true); // Pass a second parameter to indicate it's an edit
+    } else {
+      onTaskAdd(newTask); // Otherwise, it's an add operation
+    }
     navigate("/");
   };
 
@@ -60,7 +74,7 @@ const TaskForm = ({ onTaskAdd }) => {
           InputLabelProps={{ shrink: true }}
         />
         <Button variant='contained' color='primary' onClick={handleSubmit}>
-          Add Task
+          {taskToEdit ? "Update Task" : "Add Task"}
         </Button>
       </form>
     </Box>
