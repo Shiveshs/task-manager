@@ -36,7 +36,7 @@ const App = () => {
           element={
             <TaskManager
               tasks={tasks}
-              onDeleteTask={handleDeleteTask}
+              onTaskDelete={handleDeleteTask}
               onTaskEdit={handleTaskEdit}
             />
           }
