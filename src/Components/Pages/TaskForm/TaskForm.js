@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const TaskForm = ({ onTaskAdd }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [storyPoint, setStoryPoint] = useState("");
+  const [deadline, setDeadline] = useState("");
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
@@ -18,12 +18,12 @@ const TaskForm = ({ onTaskAdd }) => {
     setDescription(e.target.value);
   };
 
-  const handleStoryPointChange = (e) => {
-    setStoryPoint(e.target.value);
+  const handleDeadlineChange = (e) => {
+    setDeadline(e.target.value);
   };
 
   const handleSubmit = () => {
-    const newTask = { title, description, storyPoint };
+    const newTask = { title, description, deadline };
     onTaskAdd(newTask);
     navigate("/");
   };
@@ -50,12 +50,14 @@ const TaskForm = ({ onTaskAdd }) => {
           onChange={handleDescriptionChange}
         />
         <TextField
-          label='Story Point'
+          label='Deadline'
           variant='outlined'
+          type='date'
           fullWidth
           margin='normal'
-          value={storyPoint}
-          onChange={handleStoryPointChange}
+          value={deadline}
+          onChange={handleDeadlineChange}
+          InputLabelProps={{ shrink: true }}
         />
         <Button variant='contained' color='primary' onClick={handleSubmit}>
           Add Task

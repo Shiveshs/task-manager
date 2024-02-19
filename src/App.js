@@ -10,6 +10,12 @@ const App = () => {
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
 
+  const handleDeleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
@@ -24,7 +30,7 @@ const App = () => {
         path="/"
         element={<Layout />}
       >
-        <Route index element={<TaskManager tasks={tasks} />} />
+        <Route index element={<TaskManager tasks={tasks} onDeleteTask={handleDeleteTask}/>} />
         <Route path="task-form" element={<TaskForm onTaskAdd={handleTaskAdd} />} />
       </Route>
     </Routes>
