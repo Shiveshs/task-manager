@@ -33,7 +33,11 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
       <Typography variant='h4' align='center' gutterBottom>
         Task Manager
       </Typography>
-      <List>
+      {tasks.length === 0 ? (
+        <Typography variant="body1" align="center">
+          No tasks available.
+        </Typography>
+      ):(<List>
         {tasks.map((task, index) => (
           <Card
             key={index}
@@ -69,7 +73,7 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
             </CardContent>
           </Card>
         ))}
-      </List>
+      </List>)}
       {editingTask && (
         <TaskForm
           onTaskAdd={(updatedTask, isEdit) => {
