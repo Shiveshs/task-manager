@@ -20,6 +20,14 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
     setEditingTask(null);
   };
 
+  const onDateSort = (tasks) => {
+    const sortedTasks = [...tasks].sort((a,b)=> new Date(b.deadline) - new Date(a.deadline));
+    //return sorted by date
+    return sortedTasks;
+  }
+
+  
+
   return (
     <Paper
       elevation={3}
@@ -38,7 +46,7 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
           No tasks available.
         </Typography>
       ):(<List>
-        {tasks.map((task, index) => (
+        {onDateSort(tasks).map((task, index) => (
           <Card
             key={index}
             style={{
@@ -53,6 +61,9 @@ const TaskManager = ({ tasks, onTaskDelete, onTaskEdit }) => {
               </Typography>
               <Typography variant='body2' color='text.secondary'>
                 {task.description}
+              </Typography>
+              <Typography variant='body2' color='text.secondary'>
+                {task.deadline}
               </Typography>
             </CardContent>
             <CardContent sx={{ display: "flex" }}>
